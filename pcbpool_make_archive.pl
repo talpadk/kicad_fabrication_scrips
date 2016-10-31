@@ -6,8 +6,20 @@ use Cwd;
 use File::stat;
 use File::Basename;
 use Time::localtime;
+use Getopt::Long;
 
 my $scriptPath = dirname(__FILE__);
+
+my $unzipCmd = "file-roller";
+my $show = 0;
+
+my %options = (
+    'show' => \$show,
+    'show-cmd=s' => \$unzipCmd
+    );
+
+GetOptions(%options);
+
 
 my $defaultColour = "\e[39m";
 my $redColour = "\e[31m";
@@ -183,5 +195,8 @@ chdir($tmpDirName);
 `zip -r /tmp/test.zip '$projectName'`;
 chdir($oldPath);
 
+if ($show){
+    print `$unzipCmd /tmp/test.zip`;
+}
 
 
