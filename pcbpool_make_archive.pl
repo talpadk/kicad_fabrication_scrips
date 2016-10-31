@@ -7,18 +7,54 @@ use File::stat;
 use File::Basename;
 use Time::localtime;
 use Getopt::Long;
+use Pod::Usage;
 
 my $scriptPath = dirname(__FILE__);
 
 my $unzipCmd = "file-roller";
 my $show = 0;
+my $showHelp = 0;
 
 my %options = (
+    'help' => \$showHelp,
     'show' => \$show,
     'show-cmd=s' => \$unzipCmd
     );
 
-GetOptions(%options);
+GetOptions(%options) or pod2usage(2);
+
+if ($showHelp){
+    pod2usage(1);
+}
+
+=pod
+
+=head1 NAME
+    
+    pcbpool_make_archive.pl generates a zip archive containing the files needed for them to produce a PCB and optionally also assemble it.
+
+=head1 SYNOPSIS
+
+    pcbpool_make_archive.pl 
+
+    
+
+=head1 OPTIONS
+    
+=over 1
+
+=item B<--help>
+Shows this help
+
+=item B<--show>
+Shows the resulting zip archive
+
+=item B<--show-cmd> 
+The tool used to show the .zip archive, defaults to 'file-roller'. As an example --show-cmd='unzip -l' could be used if one simply wanted to have the content listed.
+
+=back
+
+=cut
 
 
 my $defaultColour = "\e[39m";
