@@ -48,6 +48,7 @@ my %knownTypes = ('Gerber_Pick&Place.txt'=>'PCB-POOL formated pick and place fil
 		  '-F.SilkS.gto'=>'Gerber top silk screen',
 		  '-F.Paste.gtp'=>'Gerber top solder paste',
 		  'pcbpool_bom_compact.csv'=>'PCB-POOL formated Bill Of Materials file',
+		  'pcbpool_bom.csv'=>'PCB-POOL formated Bill Of Materials file',
 		  'README.TXT'=>'This file',
 		  'assembly.pdf'=>'A pdf file describing/showing the location and orientation of the different parts'
 		  
