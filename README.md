@@ -14,3 +14,6 @@ but also attempt to detect/prevent human errors for instance ensure that the fil
 * bom2pcbpool.pl, reads a BOM formatted as a CVS file from STDIN and outputs a Bill of materials with the correct columns for a BOM file suited for assembly at pcbpool.com on STDOUT
 * compress_pcbpool_bom.pl, reads the output from bom2pcbpool.pl on STDIN and "compresses" it by joining / grouping similar components on one line.
 * make_readme.pl, a script that generates a README.txt in the current working directory explaining the files in the current working directory as well as the folder gerber
+
+## Dependencies
+sudo apt install libfile-homedir-perl

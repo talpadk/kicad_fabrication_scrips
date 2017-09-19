@@ -1,16 +1,20 @@
 #!/usr/bin/perl
 
 use strict;
+use File::HomeDir;
 
 my %headerElementLookup = ();
 my %supplierUrls = ();
 
+my $dataPath = File::HomeDir->my_data."/kicad_scripts_data/";
+
 my $file;
-my $supplierUrlsFilename = "supplierLinks.txt";
+my $supplierUrlsFilename = $dataPath."supplierLinks.txt";
+
 if (open($file, "<$supplierUrlsFilename")){
     while (<$file>){
 	my $line = $_;
-	if ($line =~ /^\s*(\w+\:\:\w+)\s*=\s*([^\s]+)\s*$/){
+	if ($line =~ /^\s*([\w+-_]+\:\:[\w-+_]+)\s*=\s*(\S+)\s*$/){
 	    $supplierUrls{lc($1)}=$2;
 	}
     }
@@ -53,8 +57,8 @@ sub output{
 		my $supplier = lc($elements[$headerElementLookup{"supplier"}]);
 		my $supplierPn = lc($elements[$headerElementLookup{"supplierpn"}]);
 
-		if (defined($supplierUrls{"$supplier::$supplierPn"})){
-		    $data = $supplierUrls{"$supplier::$supplierPn"};
+		if (defined($supplierUrls{"$supplier\:\:$supplierPn"})){
+		    $data = $supplierUrls{"$supplier\:\:$supplierPn"};
 		}
 	    }
 	}	
@@ -82,7 +86,7 @@ while (<STDIN>){
     output('description2');
     print ",1";
     output('place');
-    print ",yes";
+    print ",no";
     output('supplier');
     output('supplierpn');
     output('supplierlink');

@@ -5,6 +5,7 @@ use File::Temp;
 use Cwd;
 use File::stat;
 use File::Basename;
+use File::HomeDir;
 use Time::localtime;
 use Getopt::Long;
 use Pod::Usage;
@@ -21,9 +22,14 @@ my %options = (
     'show-cmd=s' => \$unzipCmd
     );
 
+my $supplierLinksFile = File::HomeDir->my_data."/kicad_scripts_data/supplierLinks.txt";
+
+
 GetOptions(%options) or pod2usage(2);
 
 if ($showHelp){
+    print "Supplier link urls are loaded from '".$supplierLinksFile."'\n\n";
+    
     pod2usage(1);
 }
 
