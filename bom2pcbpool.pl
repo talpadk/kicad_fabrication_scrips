@@ -31,7 +31,7 @@ foreach my $element (@headerElements){
     $index++;
 }
     
-print "Part,Value,Device,Package,Description,Description2,Qty,Place_YES/NO,Povided_by_customer_YES/NO,Distributor,Ordernumber,Weblink,Remarks_customer,Manufacturer,ManufacturerPN\n";
+print "Part,Value,Device,Package,Description,Description2,Qty,Place_YES/NO,Provided_by_customer_YES/NO,Distributor,Ordernumber,Weblink,Remarks_customer,Manufacturer,ManufacturerPN\n";
 
 my @elements = ();
 my $firstOnLine = 1;
@@ -73,6 +73,32 @@ sub output{
     $firstOnLine = 0;
 }
 
+sub outputSupplied {
+    my $place;
+    our %headerElementsLookup;
+    our @elements;
+    our $firstOnLine;
+    
+    if (defined($headerElementLookup{'place'})){
+	$place = $elements[$headerElementLookup{'place'}];
+    }
+    else {
+	die ("Place information not found\n");
+    }
+    $place =~ s/^\s+|\s+$//g;
+
+    if (!$firstOnLine){
+	print ',';
+    }
+    $firstOnLine = 0;
+    
+    if ($place eq "no"){
+	print "no";
+    }
+    else {
+	print "$place";
+    }
+}
 
 while (<STDIN>){
     our @elements = split(/,/, $_);
@@ -86,7 +112,7 @@ while (<STDIN>){
     output('description2');
     print ",1";
     output('place');
-    print ",no";
+    outputSupplied();
     output('supplier');
     output('supplierpn');
     output('supplierlink');
