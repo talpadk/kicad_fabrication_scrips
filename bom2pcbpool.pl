@@ -96,7 +96,8 @@ sub outputSupplied {
 	print "no";
     }
     else {
-	print "$place";
+	#	print "$place";
+	print "no";
     }
 }
 
