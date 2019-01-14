@@ -160,6 +160,17 @@ else {
     notice("Project without a BOM, generating archive without assembly instructions");
 }
 
+#Check board specification
+my $boardSpecificationName="board_specification.pdf";
+my $hasBoardSpecification=0;
+if (-e $boardSpecificationName){
+    checkFileDateVsSource($boardSpecificationName);
+    $hasBoardSpecification = 1;
+}
+else {
+    notice("No board specification was found");
+}
+
 #Check assembly docs
 my $hasAssemblyPdf = 0;
 my $assemblyName = 'assembly.pdf';
@@ -215,6 +226,11 @@ my $outputDirectory = "$tmpDirName/$projectName";
 
 #Handling of assembly information
 `cp $assemblyName '$outputDirectory'`;
+
+#Handling of the board specification
+if ($hasBoardSpecification){
+    `cp $boardSpecificationName '$outputDirectory'`;
+}
 
 if ($hasPickAndPlaceFile){
     chdir($outputDirectory."/gerber");
