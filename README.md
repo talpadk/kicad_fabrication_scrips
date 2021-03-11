@@ -11,7 +11,8 @@ but also attempt to detect/prevent human errors for instance ensure that the fil
 * bom2pcbpool.pl, reads a BOM formatted as a CVS file from STDIN and outputs a Bill of materials with the correct columns for a BOM file suited for assembly at pcbpool.com on STDOUT
 * compress_pcbpool_bom.pl, reads the output from bom2pcbpool.pl on STDIN and "compresses" it by joining / grouping similar components on one line.
 * make_readme.pl, a script that generates a README.txt in the current working directory explaining the files in the current working directory as well as the folder gerber
-
+* make_pcbpool_pick_and_place.pl reads a kicad .pos file (unit mm and both side in one file) and outputs Gerber_Pick&Place.txt (pcb-pool format) and gerbv_pick_and_place.csv (readable by gerbv) to current directory
+* make_hfpcb_pick_and_place.pl reads a kicad .pos file (unit mm and both side in one file) and outputs PnP_for_hfpcb_top_side.txt (high five pcb format) and gerbv_pick_and_place.csv (readable by gerbv) to current directory
 
 ## Dependencies
-sudo apt install libfile-homedir-perl zip
+sudo apt install perl libfile-homedir-perl zip
